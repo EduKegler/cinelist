@@ -1,0 +1,13 @@
+.cl-sider {
+    width: 400px;
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ul {
+        list-style-type: none;
+        li {
+        }
+    }
+}

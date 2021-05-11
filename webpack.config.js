@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const dotEnv = require("dotenv-webpack");
 
 module.exports = {
     mode: 'development',
@@ -10,7 +11,7 @@ module.exports = {
         publicPath: '/'
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './src/index.html' })],
+        new HtmlWebpackPlugin({ template: './src/index.html' }), new dotEnv()],
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },

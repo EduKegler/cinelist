@@ -1,4 +1,33 @@
 .cf-movieThumb {
   position: relative;
   cursor: pointer;
+  position: relative;
+  background-color: var(--primary-dark);
+
+  img { 
+    width: 100%;
+  }
+
+  img, .cf-movieThumb__details { 
+    transition: opacity 0.5s ease-out;
+  }
+
+  .cf-movieThumb__details { 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    font-size: 1.275rem;
+  }
+
+  &:hover { 
+    img { 
+      opacity: 0.25;
+    }
+    .cf-movieThumb__details { 
+      display: block;
+      opacity: 1;
+    }
+  }
 }

@@ -1,13 +1,21 @@
 .cl-sider {
-    width: 400px;
+    padding: 5rem;
     height: calc(100vh - 80px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
-    ul {
-        list-style-type: none;
-        li {
+    .cl-sider__menu {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;
+
+        position: fixed;
+        z-index: 1;
+        top: 50%;
+
+        a {
+            text-decoration: none;
+            color: var(--white-200);
         }
     }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const useDebounce = (value, delay) => {
+export const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = React.useState(value);
   React.useEffect(() => {
     const handler = setTimeout(() => {
@@ -30,4 +30,12 @@ export const useSwitch = (initialState: boolean = false): VisibleProps => {
       onChange: onChange,
       onClick: onClick
   };
+};
+
+export const usePrevious = <T extends {}>(value?: T) => {
+  const ref = React.useRef<T>();
+  React.useEffect(() => {
+      ref.current = value;
+  });
+  return ref.current;
 };

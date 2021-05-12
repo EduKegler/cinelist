@@ -15,13 +15,14 @@ export const MovieThumb = React.memo((props: MovieThumbProps) => {
     return (
         <div
             className="cf-movieThumb"
-            // onMouseLeave={() => visible.onChange(false)}
             onClick={() => visible.onChange(true)}
+            onMouseLeave={() => visible.onChange(false)}
         >
             <img
                 src={`https://www.themoviedb.org/t/p/w185/${movie.poster_path}`}
                 alt='movie'
             />
+            <span className="cf-movieThumb__details">Details</span>
             <MovieCard movie={movie} isVisible={visible.value} />
         </div>
     )

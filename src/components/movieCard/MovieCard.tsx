@@ -5,7 +5,7 @@ import { faBookmark as faBookmarkSolid, faChartPie, faPlay, faClock as faClockSo
 import { faBookmark as faBookmarkRegular, faClock as faClockRegular } from '@fortawesome/free-regular-svg-icons';
 import { useConfig } from '../contexts/ConfigContextProvider';
 import { deleteBookmarkItem, insertBookmarkItem, isBookmarkItem } from '../../api/service/Booksmark';
-import { insertWatchListItem, deleteWatchListItem, isInWatchListItem } from '../../api/service/WatchLater';
+import { useMyList } from '../contexts/MyMoviesContextProvider';
 
 export type Movie = {
     adult: boolean;
@@ -30,10 +30,12 @@ export interface MovieCardProps {
 }
 
 export const MovieCard = React.memo((props: MovieCardProps) => {
+
     const { movie, isVisible } = props;
 
+    const { isMovieAlreadySave, removeMovie, insertMovie } = useMyList();
     const [isBookmarked, setIsBookmarked] = React.useState(isBookmarkItem(movie.id));
-    const [isInWatchLaterList, setIsInWatchLaterList] = React.useState(isInWatchListItem(movie));
+    const [isInWatchLaterList, setIsInWatchLaterList] = React.useState(isMovieAlreadySave(movie));
 
     const { getGenreById } = useConfig();
 
@@ -49,10 +51,10 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
 
     const toggleWatchLaterListItem = () => {
         if (isInWatchLaterList) {
-            deleteWatchListItem(movie);
+            removeMovie(movie);
             setIsInWatchLaterList(false)
         } else {
-            insertWatchListItem(movie);
+            insertMovie(movie);
             setIsInWatchLaterList(true)
         }
     }

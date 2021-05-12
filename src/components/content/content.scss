@@ -1,15 +1,44 @@
-.cl-content { 
+.cl-content {
     width: 100%;
+    position: relative;
 }
 
-.cl-content__movies { 
+.cl-content__movies {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
     grid-auto-rows: auto;
     grid-gap: 2rem;
-    padding: 1rem 5rem ;
+    padding: 1rem 5rem;
 }
 
 .cl-content__thumbnail {
     border-radius: 5px;
+}
+
+.page {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+}
+
+.page-enter {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.page-exit-active {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 300ms, transform 300ms;
 }

@@ -9,18 +9,13 @@
 :root {
     --white: #FFF;
 
-    --gray-50: #F7F8FA;
-    --gray-100: #E6E8EB;
-    --gray-200: #AFB2B1;
-    --gray-500: #808080;
-    --gray-800: #494D4B;
+    --primary: #EB7000;
+    --primary-dark: #0D0600;
 
-    --green-500: #04D361;
+    --white-200: #FCFCEB;
 
-    --purple-300: #9F75FF;
-    --purple-400: #9164FA;
-    --purple-500: #8257E5;
-    --purple-800: #6F48C9;
+    --gray-100: #D4CAE4;
+    --gray-200: #423F3C;
 }
 
 @media (max-width: 1080px) { 
@@ -36,19 +31,19 @@
 }
 
 body {
-    background:rgba(0,0,0,0.6);
+    background-color: var(--white-200);
     opacity: 1;
 }
 
 body, input, textarea, button {
     font: 500 1rem sans-serif;
-    color: var(--gray-500);
+    color: var(--primary);
 }
 
 h1, h2, h3, h4, h5, h6 { 
     font-weight: 600;
     font-family: sans-serif;
-    color: var(--gray-800)
+    color: var(--primary)
 }
 
 h1 { 

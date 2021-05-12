@@ -14,3 +14,20 @@ export const useDebounce = (value, delay) => {
   );
   return debouncedValue;
 };
+
+interface VisibleProps {
+  value: boolean;
+  onChange: (b: boolean) => void;
+  onClick: () => void;
+}
+
+export const useSwitch = (initialState: boolean = false): VisibleProps => {
+  const [visible, setVisible] = React.useState(initialState);
+  const onChange = (b: boolean = !visible) => { setVisible(b); };
+  const onClick = () => { setVisible(!visible); };
+  return {
+      value: visible,
+      onChange: onChange,
+      onClick: onClick
+  };
+};

@@ -16,14 +16,14 @@ type SearchMovieContextProps = {
 
 export const SearchMovieContext = createContext({} as SearchMovieContextData);
 
-export function SearchMovieContextProvider(props: SearchMovieContextProps): JSX.Element {
+export const SearchMovieContextProvider = React.memo((props: SearchMovieContextProps) => {
 
     const [search, setSearch] = React.useState('Batman');
     const [movies, setMovies] = React.useState<Movie[]>([]);
 
     const searchTerm = useDebounce(search, 1000);
 
-    async function fetchMovies() {
+    const fetchMovies = async () => {
         try {
             const { data } = await client().get('/search/movie', { params: { query: searchTerm } })
             setMovies(data.results);
@@ -43,6 +43,6 @@ export function SearchMovieContextProvider(props: SearchMovieContextProps): JSX.
             {props.children}
         </SearchMovieContext.Provider>
     )
-}
+})
 
 export const useSearchMovie = () => useContext(SearchMovieContext);

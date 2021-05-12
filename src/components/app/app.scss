@@ -1,10 +1,4 @@
 .cl-app {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url("../../assets/images/guardians-of-the-galaxy-4k.jpg") no-repeat fixed;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    filter: grayscale(100%);
 
     .cl-app__content {
         display: flex;

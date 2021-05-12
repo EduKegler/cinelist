@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSearchMovie } from '../contexts/SearchContextProvider';
-import { MovieCard } from '../movieCard/MovieCard';
+import { MovieThumb } from '../movieThumb/MovieThumb';
 import './content.scss';
 
 export const Content = React.memo(() => {
@@ -8,7 +8,7 @@ export const Content = React.memo(() => {
     return (
         <div className="cl-content">
             <div className="cl-content__movies">
-                {movies.map(movie => <MovieCard key={movie.id} movie={movie} />)}
+                {movies.map(movie => <MovieThumb key={movie.id} movie={movie}/>)}
             </div>
         </div>)
 });

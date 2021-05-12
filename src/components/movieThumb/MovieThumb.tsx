@@ -10,13 +10,13 @@ export interface MovieThumbProps {
 export const MovieThumb = React.memo((props: MovieThumbProps) => {
     const { movie } = props;
 
-    const visible = useSwitch(false);
+    const visible = useSwitch();
 
     return (
         <div
             className="cf-movieThumb"
-            onMouseLeave={() => visible.onChange(false)}
-            onMouseOver={() => visible.onChange(true)}
+            // onMouseLeave={() => visible.onChange(false)}
+            onClick={() => visible.onChange(true)}
         >
             <img
                 src={`https://www.themoviedb.org/t/p/w185/${movie.poster_path}`}

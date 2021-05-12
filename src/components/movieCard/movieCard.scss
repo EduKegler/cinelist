@@ -1,5 +1,5 @@
 .cl-movieCard {
-
+    color: var(--gray-200);
     position: absolute;
     box-shadow: 0px 0px 150px #000000;
     z-index: 2;
@@ -7,18 +7,24 @@
     transform: scale(1.5);
     top: 0;
     left: 0;
-    
+
     background-color: white;
+    color: var(--gray-200);
     padding: 1rem;
     display: block;
+
+    cursor: default;
 
     .cl-movieCard__header {
         .cl-movieCard__title {
             font-size: 1.2rem;
+            border-left: 2px solid var(--primary);
+            padding-left: 0.5rem;
         }
 
         .cl-movieCard__categories {
-            font-size: 0.725rem;
+            font-size: 0.65rem;
+            padding-left: calc(0.5rem + 2px);
         }
     }
 
@@ -29,8 +35,16 @@
     }
 
     .cl-movieCard__overview {
-        font-size: 0.8rem;
+        font-size: 0.65rem;
         margin: 1rem 0;
+        P {
+            color: var(--gray-100);
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 
     .cl-movieCard__actions {
@@ -38,12 +52,46 @@
         display: flex;
         justify-content: space-between;
         margin: 1rem 0;
+
+        svg {
+            cursor: pointer;
+        }
+
+        .cl-movieCard__userScore span {
+            font-size: 0.65rem;
+            margin-left: 0.25rem;
+        }
+
+        .cl-movieCard__watchLater {
+            margin-right: 30.2px;
+        }
     }
 
     .cl-movieCard__watch {
-        font-size: 0.8rem;
+        font-size: 0.575rem;
         display: flex;
         justify-content: space-between;
+
+        .cl-movieCard__watchButton {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            cursor: pointer;
+            background-color: var(--white-200);
+            padding: 0.5rem;
+
+            &:hover {
+                background-color: var(--primary);
+                color: var(--white);
+            }
+        }
+    }
+
+    .cl-movieCard__verticalHorizontal {
+        background-color: var(--primary);
+        margin-top: 1rem;
+        height: 1px;
+        width: 100%;
     }
 }
 

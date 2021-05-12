@@ -1,8 +1,11 @@
 import React from 'react';
 import './movieCard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark, faChartPie, faPlay, faPlusSquare, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark as faBookmarkSolid, faChartPie, faPlay, faClock as faClockSolid } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark as faBookmarkRegular, faClock as faClockRegular } from '@fortawesome/free-regular-svg-icons';
 import { useConfig } from '../contexts/ConfigContextProvider';
+import { deleteBookmarkItem, insertBookmarkItem, isBookmarkItem } from '../../api/service/Booksmark';
+import { insertWatchListItem, deleteWatchListItem, isInWatchListItem } from '../../api/service/WatchLater';
 
 export type Movie = {
     adult: boolean;
@@ -29,29 +32,69 @@ export interface MovieCardProps {
 export const MovieCard = React.memo((props: MovieCardProps) => {
     const { movie, isVisible } = props;
 
+    const [isBookmarked, setIsBookmarked] = React.useState(isBookmarkItem(movie.id));
+    const [isInWatchLaterList, setIsInWatchLaterList] = React.useState(isInWatchListItem(movie));
+
     const { getGenreById } = useConfig();
+
+    const toggleBookmarkItem = () => {
+        if (isBookmarked) {
+            deleteBookmarkItem(movie.id);
+            setIsBookmarked(false)
+        } else {
+            insertBookmarkItem(movie.id);
+            setIsBookmarked(true)
+        }
+    }
+
+    const toggleWatchLaterListItem = () => {
+        if (isInWatchLaterList) {
+            deleteWatchListItem(movie);
+            setIsInWatchLaterList(false)
+        } else {
+            insertWatchListItem(movie);
+            setIsInWatchLaterList(true)
+        }
+    }
 
     return (
         <div className={`cl-movieCard ${isVisible ? '' : 'cl-movieCard--hide'}`}>
             <div className="cl-movieCard__header">
-                <div className='cl-movieCard__title'>{movie.title}</div>
+                <div className='cl-movieCard__title'>
+                    {movie.title}
+                </div>
                 <div className='cl-movieCard__categories'>
                     {movie.genre_ids.map(genreId => getGenreById(genreId)).join(' - ')}
                 </div>
             </div>
+            <div className='cl-movieCard__verticalHorizontal' />
             <div className="cl-movieCard__overview">
                 <b>Overview:</b>
-                <p>{movie.overview ?? 'Nothing here yet.'}</p>
+                <p>{movie.overview || 'There\'s nothing here, yet.'}</p>
             </div>
             <div className="cl-movieCard__actions">
-                <FontAwesomeIcon icon={faChartPie} />
-                <FontAwesomeIcon icon={faPlusSquare} />
-                <FontAwesomeIcon icon={faBookmark} />
-                <FontAwesomeIcon icon={faStar} />
+                <span className="cl-movieCard__userScore">
+                    <FontAwesomeIcon color='#eb7000' icon={faChartPie} />
+                    <span >50%</span>
+                </span>
+                <FontAwesomeIcon
+                    className='cl-movieCard__watchLater'
+                    color='#eb7000' icon={isInWatchLaterList ? faClockSolid : faClockRegular}
+                    onClick={toggleWatchLaterListItem}
+                />
+                <FontAwesomeIcon
+                    color='#eb7000'
+                    icon={isBookmarked ? faBookmarkSolid : faBookmarkRegular}
+                    onClick={toggleBookmarkItem}
+                />
             </div>
             <div className="cl-movieCard__watch">
-                <FontAwesomeIcon icon={faPlay} />Trailer
-                    <FontAwesomeIcon icon={faPlay} />Watch
+                <div className="cl-movieCard__watchButton">
+                    <FontAwesomeIcon icon={faPlay} size='xs' />Trailer
+                </div>
+                <div className="cl-movieCard__watchButton">
+                    <FontAwesomeIcon icon={faPlay} size='xs' />Watch
+                </div>
             </div>
         </div>)
 });

@@ -10,11 +10,11 @@
     --white: #FFF;
 
     --primary: #EB7000;
-    --primary-dark: #0D0600;
+    --primary-dark: #060606;
 
-    --white-200: #FCFCEB;
+    --white-200: #c7c7c7;
 
-    --gray-100: #D4CAE4;
+    --gray-100: #797979;
     --gray-200: #423F3C;
 }
 
@@ -31,19 +31,19 @@
 }
 
 body {
-    background-color: var(--white-200);
+    background-color: var(--primary-dark);
     opacity: 1;
 }
 
 body, input, textarea, button {
-    font: 500 1rem sans-serif;
-    color: var(--primary);
+    font: 500 1rem 'Inter', sans-serif;
+    color: var(--white-200);
 }
 
 h1, h2, h3, h4, h5, h6 { 
     font-weight: 600;
-    font-family: sans-serif;
-    color: var(--primary)
+    font-family: 'Inter',   sans-serif;
+    color: var(--white-200)
 }
 
 h1 { 

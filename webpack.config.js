@@ -3,19 +3,19 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dotEnv = require("dotenv-webpack");
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/index.tsx',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, '/dist'),
-        publicPath: '/'
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: './'
     },
+    
     plugins: [
         new HtmlWebpackPlugin({ template: './src/index.html' }), new dotEnv()],
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
-    devtool: 'eval-source-map',
     module: {
         rules: [
             {
@@ -46,12 +46,15 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+
         ]
     },
     devServer: {
         historyApiFallback: true,
         disableHostCheck: true,
         port: 3000,
-        writeToDisk: false,
+    },
+    performance: {
+        hints: false,
     },
 }

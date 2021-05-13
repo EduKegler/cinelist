@@ -1,18 +1,18 @@
 .cf-movieThumb {
   position: relative;
   cursor: pointer;
-  position: relative;
   background-color: var(--primary-dark);
 
-  img { 
+  img {
     width: 100%;
   }
 
-  img, .cf-movieThumb__details { 
+  img,
+  .cf-movieThumb__details {
     transition: opacity 0.5s ease-out;
   }
 
-  .cf-movieThumb__details { 
+  .cf-movieThumb__details {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -21,13 +21,21 @@
     font-size: 1.275rem;
   }
 
-  &:hover { 
-    img { 
+  &:hover {
+    img {
       opacity: 0.25;
     }
-    .cf-movieThumb__details { 
+    .cf-movieThumb__details {
       display: block;
       opacity: 1;
     }
   }
 }
+
+// @media only screen and (max-width: 767px) {
+//   .cl-movieThumb {
+//     img {
+//       max-width: 180px;
+//     }
+//   }
+// }

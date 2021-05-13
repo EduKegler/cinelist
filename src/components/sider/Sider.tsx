@@ -6,7 +6,7 @@ export const Sider = React.memo(() => {
     return (
         <div className="cl-sider">
             <div className="cl-sider__menu">
-            <Link to='/'>Search</Link>
+            <Link className='active' to='/'>Search</Link>
             <Link to='/my-list'>My List</Link>
             <Link to='/categories'>Categories</Link>
             </div>

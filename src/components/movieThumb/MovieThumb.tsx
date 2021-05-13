@@ -1,7 +1,8 @@
 import React from 'react';
-import './movieThumb.scss';
 import { Movie, MovieCard } from '../movieCard/MovieCard';
 import { useSwitch } from '../../helpers/util';
+
+import './movieThumb.scss'
 
 export interface MovieThumbProps {
     movie: Movie;
@@ -11,10 +12,9 @@ export const MovieThumb = React.memo((props: MovieThumbProps) => {
     const { movie } = props;
 
     const visible = useSwitch();
-
     return (
         <div
-            className="cf-movieThumb"
+            className={`cf-movieThumb`}
             onClick={() => visible.onChange(true)}
             onMouseLeave={() => visible.onChange(false)}
         >
@@ -23,7 +23,7 @@ export const MovieThumb = React.memo((props: MovieThumbProps) => {
                 alt='movie'
             />
             <span className="cf-movieThumb__details">Details</span>
-            <MovieCard movie={movie} isVisible={visible.value} />
+            <MovieCard movie={movie} isVisible={visible.value}/>
         </div>
     )
 });

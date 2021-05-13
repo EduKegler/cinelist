@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
 import { createContext } from "react";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { client } from "../../api/client";
-import { useDebounce, usePrevious } from "../../helpers/util";
+import { useDebounce } from "../../helpers/util";
 import { Movie } from "../movieCard/MovieCard";
 
 type SearchMovieContextData = {
     search: string;
+    loading: boolean;
+    hasMore: boolean;
     setSearch: (search: string) => void;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
     movies: Movie[];
 }
 
@@ -19,35 +22,52 @@ export const SearchMovieContext = createContext({} as SearchMovieContextData);
 
 export const SearchMovieContextProvider = React.memo((props: SearchMovieContextProps) => {
 
-    const [search, setSearch] = React.useState('');
+    const [search, setSearch] = React.useState<string>();
     const [movies, setMovies] = React.useState<Movie[]>([]);
+    const [loading, setLoading] = React.useState(false);
+    const [page, setPage] = React.useState(1);
+    const [hasMore, setHasMore] = React.useState(true);
 
     const searchTerm = useDebounce(search, 1000);
     const location = useLocation();
+    const history = useHistory();
 
     const fetchMovies = async () => {
         try {
-            const { data } = await client().get('/search/movie', { params: { query: searchTerm || 'a' } })
-            setMovies(data.results);
+            setLoading(true)
+            await client().get('/search/movie', {
+                params: {
+                    query: searchTerm || 'a',
+                    page
+                }
+            }).then(({ data }) => {
+                setLoading(false)
+                setMovies(oldValue => [...oldValue, ...data.results]);
+                setHasMore(data.page !== data.total_pages);
+            })
         } catch (err) {
             console.error(err);
+        } finally {
+            setLoading(false)
         }
     }
 
-    const prevLocation = usePrevious(location);
-    React.useEffect(() => { fetchMovies(); }, [searchTerm]);
     React.useEffect(() => {
-        if (prevLocation?.pathname !== location?.pathname) {
-            if (search) {
-                setMovies([]);
-            }
-            setSearch('');
+        if (location?.pathname === '/' || searchTerm !== undefined) {
+            fetchMovies();
         }
-    }, [location]);
+        if (searchTerm !== undefined) {
+            history.push('/');
+        }
+    }, [page, searchTerm]);
+
+    React.useEffect(() => {
+        setMovies([]);
+    }, [searchTerm]);
 
     return (
         <SearchMovieContext.Provider
-            value={{ search, setSearch, movies }}
+            value={{ search, setSearch, movies, loading, hasMore, setPage }}
         >
             {props.children}
         </SearchMovieContext.Provider>

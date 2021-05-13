@@ -1,18 +1,59 @@
-.cl-header { 
-    height: 80px;
-    padding: 5rem;
-    align-items: center;
-    display: flex;
-    gap: 2rem;
+.cl-header {
+    .cl-header__desktop {
+        padding: 5rem;
+        align-items: center;
+        gap: 2rem;
+        flex-flow: row wrap;
 
-    .cl-header__search { 
+        img { 
+            width: 100px;
+        }
+    }
+
+    .cl-header__mobile {
+        padding: 1.5rem;
+
+        img { 
+            width: 50px;
+        }
+
+        .cl-header__mobile-menu {
+            align-items: center;
+            justify-content: space-between;
+            display: flex;
+            margin-bottom: 1rem;
+
+            .cl-header__menu {
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 2rem;
+                a {
+                    text-decoration: none;
+                    color: var(--white-200);
+                }
+            }
+        }
+
+        .cl-header__search {
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            input {
+                width: calc(100% - 14px - 1rem);
+            }
+        }
+    }
+
+    .cl-header__search {
         background: transparent;
         padding: 0.5rem;
         border-radius: 5px;
         border: 1px solid white;
-        margin-left: 4rem;
-        
-        input { 
+        margin-left: 2.5rem;
+
+        input {
             border: 0;
             outline: 0;
             border-radius: 5px;
@@ -20,7 +61,36 @@
         }
     }
 
-    .cl-header__extra { 
+    .cl-header__extra {
         margin-left: auto;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .cl-header__mobile {
+        display: block;
+    }
+
+    .cl-header__desktop {
+        display: none;
+    }
+    // .cl-header {
+    //     padding: 1.5rem;
+    //     display: block;
+    //     height: auto;
+    // }
+
+    // .cl-header__search {
+    //     flex: 2;
+    //     margin: 0;
+    // }
+}
+
+@media only screen and (min-width: 768px) {
+    .cl-header__mobile {
+        display: none;
+    }
+    .cl-header__desktop {
+        display: flex;
     }
 }

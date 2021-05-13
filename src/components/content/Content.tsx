@@ -1,33 +1,28 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { useMyList } from '../contexts/MyMoviesContextProvider';
-import { useSearchMovie } from '../contexts/SearchContextProvider';
 import { MovieThumb } from '../movieThumb/MovieThumb';
 import './content.scss';
 import { CSSTransition } from 'react-transition-group'
-
-
+import { Movies } from '../../api/pages/movies/Movies';
+import { MoviePage } from '../../api/pages/movie/Movie';
 
 export const Content = React.memo(() => {
 
-    const { movies } = useSearchMovie();
     const { myMovies } = useMyList();
 
     const routes = [
-        {
-            path: '/', Component: () =>
-                <div className="cl-content__movies">
-                    {movies.map(movie => <MovieThumb key={movie.id} movie={movie} />)}
-                </div>
-        },
+        { path: '/', Component: () => <Movies /> },
         {
             path: '/my-list', Component: () =>
-                <div className="cl-content__movies page">
-                    {myMovies.map(movie => <MovieThumb key={movie.id} movie={movie} />)}
+                <div className="cl-content__movies">
+                    {!myMovies.length ? 'There\'s nothing here, yet.'
+                        : myMovies.map(movie => <MovieThumb key={movie.id} movie={movie} />)}
                 </div>
         },
-        { path: '/categories', Component: () => <span>AS Soon...</span> },
-    ]
+        { path: '/movies/:id', Component: () => <MoviePage /> },
+        { path: '/categories', Component: () => <span>Coming soon...</span> },
+    ];
 
     return (
         <div className="cl-content">

@@ -16,6 +16,9 @@
 
     --gray-100: #797979;
     --gray-200: #423F3C;
+
+    --mobile-size: 767px;
+    --table-size: 991px;
 }
 
 @media (max-width: 1080px) { 
@@ -32,6 +35,10 @@
 
 body {
     background-color: var(--primary-dark);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 100% auto;
     opacity: 1;
 }
 

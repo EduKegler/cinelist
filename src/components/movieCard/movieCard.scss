@@ -1,19 +1,24 @@
 .cl-movieCard {
     color: var(--gray-200);
-    position: absolute;
     box-shadow: 0px 0px 150px #000000;
-    z-index: 2;
     transition: all 500ms ease-in;
-    transform: scale(1.5);
     top: 0;
     left: 0;
+    z-index: 2;
 
     background-color: white;
-    color: var(--gray-200);
     padding: 1rem;
     display: block;
-
     cursor: default;
+    position: absolute;
+
+    transform: scale(0);
+
+    width: 325px;
+    height: auto;
+
+    border-radius: 5px;
+    animation: all 0.1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 
     .cl-movieCard__header {
         .cl-movieCard__title {
@@ -95,7 +100,6 @@
     }
 }
 
-.cl-movieCard--hide {
-    display: none;
-    transition: all 500ms ease-in;
+.cl-movieCard--open {
+    transform: scale(1.5);
 }

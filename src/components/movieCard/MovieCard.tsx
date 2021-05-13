@@ -6,6 +6,7 @@ import { faBookmark as faBookmarkRegular, faClock as faClockRegular } from '@for
 import { useConfig } from '../contexts/ConfigContextProvider';
 import { deleteBookmarkItem, insertBookmarkItem, isBookmarkItem } from '../../api/service/Booksmark';
 import { useMyList } from '../contexts/MyMoviesContextProvider';
+import { useHistory } from 'react-router';
 
 export type Movie = {
     adult: boolean;
@@ -33,6 +34,7 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
 
     const { movie, isVisible } = props;
 
+    const history = useHistory();
     const { isMovieAlreadySave, removeMovie, insertMovie } = useMyList();
     const [isBookmarked, setIsBookmarked] = React.useState(isBookmarkItem(movie.id));
     const [isInWatchLaterList, setIsInWatchLaterList] = React.useState(isMovieAlreadySave(movie));
@@ -42,25 +44,29 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
     const toggleBookmarkItem = () => {
         if (isBookmarked) {
             deleteBookmarkItem(movie.id);
-            setIsBookmarked(false)
+            setIsBookmarked(false);
         } else {
             insertBookmarkItem(movie.id);
-            setIsBookmarked(true)
+            setIsBookmarked(true);
         }
     }
 
     const toggleWatchLaterListItem = () => {
         if (isInWatchLaterList) {
             removeMovie(movie);
-            setIsInWatchLaterList(false)
+            setIsInWatchLaterList(false);
         } else {
             insertMovie(movie);
-            setIsInWatchLaterList(true)
+            setIsInWatchLaterList(true);
         }
     }
 
+    const handleRedirectToMovie = () => { 
+        history.push(`./movies/${movie.id}`)
+    }
+
     return (
-        <div className={`cl-movieCard ${isVisible ? '' : 'cl-movieCard--hide'}`}>
+        <div className={`cl-movieCard${isVisible ? ' cl-movieCard--open' : ' cl-movieCard--close'}`}>
             <div className="cl-movieCard__header">
                 <div className='cl-movieCard__title'>
                     {movie.title}
@@ -77,7 +83,7 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
             <div className="cl-movieCard__actions">
                 <span className="cl-movieCard__userScore">
                     <FontAwesomeIcon color='#eb7000' icon={faChartPie} />
-                    <span >50%</span>
+                    <span>50%</span>
                 </span>
                 <FontAwesomeIcon
                     className='cl-movieCard__watchLater'
@@ -91,7 +97,7 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
                 />
             </div>
             <div className="cl-movieCard__watch">
-                <div className="cl-movieCard__watchButton">
+                <div className="cl-movieCard__watchButton" onClick={handleRedirectToMovie}>
                     <FontAwesomeIcon icon={faPlay} size='xs' />Trailer
                 </div>
                 <div className="cl-movieCard__watchButton">

@@ -1,5 +1,4 @@
 .cl-movie {
-
     .cl-movie__info {
         display: flex;
         gap: 1rem;
@@ -40,36 +39,27 @@
         margin-top: 1rem;
         display: flex;
         gap: 2rem;
-
-        .cl-movie__watchButton {
-            border-radius: 5px;
-
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-            cursor: pointer;
-            background-color: var(--white-200);
-            padding: 0.5rem;
-
-            background-color: var(--primary);
-            color: var(--white);
-
-            &:hover {
-                filter: saturate(25%);
-            }
-        }
-    }
-
-    iframe { 
-        height: 50vw;
     }
 }
 
-
 @media only screen and (max-width: 767px) {
-    .cl-movie__info {
-      img { 
-          display: none;
-      }
+    .cl-movie {
+        iframe {
+            height: 50vw;
+        }
+
+        .cl-movie__info {
+            img {
+                display: none;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 767px) {
+    .cl-movie {
+        iframe {
+            height: 60vh;
+        }
     }
 }

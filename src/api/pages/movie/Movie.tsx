@@ -1,9 +1,11 @@
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useParams } from "react-router";
 import { client } from "../../client";
 import './movie.scss';
+import youtube from '../../../assets/images/youtube.png';
+import disney from '../../../assets/images/disney.png';
+import netflix from '../../../assets/images/netflix.png';
+import amazon from '../../../assets/images/amazon.png';
 
 interface Movie {
     backdrop_path: string;
@@ -24,11 +26,15 @@ interface Cast {
     name: string;
 }
 
+interface Rent {
+    provider_name: string;
+}
+
 export const MoviePage = React.memo(() => {
 
     const [loading, setLoading] = React.useState(false);
     const [movie, setMovie] = React.useState<Movie>(undefined);
-    const [_, setProviders] = React.useState<[]>([]);
+    const [providers, setProviders] = React.useState<Rent[]>([]);
     const [credit, setCredit] = React.useState<{ cast: Cast[], crew: Cast[] }>({ cast: [], crew: [] });
     const [trailer, setTrailer] = React.useState<{ cast: Cast[], crew: Cast[] }>({ cast: [], crew: [] });
     const { id } = useParams<{ id: string }>();
@@ -40,13 +46,15 @@ export const MoviePage = React.memo(() => {
                 setMovie(data);
             })
             await client().get(`/movie/${Number(id)}/watch/providers`).then(({ data }) => {
-                setProviders(data)
+                const rent = data.results.US?.rent ?? [];
+                const flatrate = data.results.US?.flatrate ?? [];
+                const buy = data.results.US?.bye ?? [];
+                setProviders([...rent, ...flatrate, ...buy])
             });
             await client().get(`/movie/${Number(id)}/credits`).then(({ data }) => {
                 setCredit(data)
             });
             await client().get(`/movie/${Number(id)}/videos`).then(({ data }) => {
-                console.log(data)
                 setTrailer(data.results.find(video => video.type === 'Trailer' && video.site === "YouTube").key);
             });
             setLoading(false)
@@ -64,6 +72,16 @@ export const MoviePage = React.memo(() => {
     if (!movie || loading) {
         return <span>Loading...</span>
     }
+
+
+    console.log(providers);
+
+    const hasOnAmazon = providers.find(provider => provider.provider_name === 'Amazon Prime Video') ? true : false;
+    const hasOnNetFlix = providers.find(provider => provider.provider_name === 'Netflix') ? true : false;
+    const hasOnYoutube = providers.find(provider => provider.provider_name === 'YouTube') ? true : false;
+    const hasOnDisney = providers.find(provider => provider.provider_name === 'Disney Plus') ? true : false;
+
+    console.log(hasOnAmazon, hasOnNetFlix, hasOnYoutube, hasOnDisney)
 
     return (
         <div className="cl-movie">
@@ -92,9 +110,10 @@ export const MoviePage = React.memo(() => {
                     </div>
 
                     <div className="cl-movie__watch">
-                        <div className="cl-movie__watchButton">
-                            <FontAwesomeIcon icon={faPlay} size='xs' />Watch
-                </div>
+                        {hasOnAmazon && <img src={amazon} alt='amazon' width={100} />}
+                        {hasOnDisney && <img src={disney} alt='disney' width={100} />}
+                        {hasOnNetFlix && <img src={netflix} alt='netflix' width={100} />}
+                        {hasOnYoutube && <img src={youtube} alt='youtube' width={100} />}
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import './movieCard.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark as faBookmarkSolid, faChartPie, faPlay, faClock as faClockSolid } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark as faBookmarkSolid, faChartPie, faClock as faClockSolid } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as faBookmarkRegular, faClock as faClockRegular } from '@fortawesome/free-regular-svg-icons';
 import { useConfig } from '../contexts/ConfigContextProvider';
 import { deleteBookmarkItem, insertBookmarkItem, isBookmarkItem } from '../../api/service/Booksmark';
@@ -98,10 +98,7 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
             </div>
             <div className="cl-movieCard__watch">
                 <div className="cl-movieCard__watchButton" onClick={handleRedirectToMovie}>
-                    <FontAwesomeIcon icon={faPlay} size='xs' />Trailer
-                </div>
-                <div className="cl-movieCard__watchButton">
-                    <FontAwesomeIcon icon={faPlay} size='xs' />Watch
+                    More Details
                 </div>
             </div>
         </div>)

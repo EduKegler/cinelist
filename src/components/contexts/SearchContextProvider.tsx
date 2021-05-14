@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { createContext } from "react";
 import { useHistory, useLocation } from "react-router";
 import { client } from "../../api/client";
-import { useDebounce } from "../../helpers/util";
+import { useDebounce, usePrevious } from "../../helpers/util";
 import { Movie } from "../movieCard/MovieCard";
 
 type SearchMovieContextData = {
@@ -12,6 +12,7 @@ type SearchMovieContextData = {
     setSearch: (search: string) => void;
     setPage: React.Dispatch<React.SetStateAction<number>>;
     movies: Movie[];
+    handleForceSearch: () => void;
 }
 
 type SearchMovieContextProps = {
@@ -65,9 +66,18 @@ export const SearchMovieContextProvider = React.memo((props: SearchMovieContextP
         setMovies([]);
     }, [searchTerm]);
 
+    const prevPage = usePrevious(page);
+    const handleForceSearch = () => {
+        setMovies([]);
+        if (prevPage === 1) {
+            fetchMovies();
+        }
+        setPage(1);
+    };
+
     return (
         <SearchMovieContext.Provider
-            value={{ search, setSearch, movies, loading, hasMore, setPage }}
+            value={{ search, setSearch, movies, loading, hasMore, setPage, handleForceSearch }}
         >
             {props.children}
         </SearchMovieContext.Provider>

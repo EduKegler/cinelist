@@ -51,7 +51,7 @@ describe('Check My movie list', () => {
         expect(list.innerHTML).toBe("There's nothing here, yet.");
     })
 
-    it('check content when list is has items', () => {
+    it('check content when list has items', () => {
         const { getByTestId } = render(
             <MyListMovie.Provider
                 value={{ myMovies: movieList, insertMovie, removeMovie, isMovieAlreadySave }}

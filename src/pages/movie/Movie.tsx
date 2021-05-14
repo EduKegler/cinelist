@@ -1,10 +1,10 @@
 import React from "react";
 import { useParams } from "react-router";
 import './movie.scss';
-import youtube from '../../../assets/images/youtube.png';
-import disney from '../../../assets/images/disney.png';
-import netflix from '../../../assets/images/netflix.png';
-import amazon from '../../../assets/images/amazon.png';
+import youtube from '../../assets/images/youtube.png';
+import disney from '../../assets/images/disney.png';
+import netflix from '../../assets/images/netflix.png';
+import amazon from '../../assets/images/amazon.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMyList } from "../../components/contexts/MyMoviesContextProvider";
 import { deleteBookmarkItem, insertBookmarkItem, isBookmarkItem } from "../../api/service/Booksmark";
@@ -113,7 +113,7 @@ export const MoviePage = React.memo(() => {
     return (
         <div data-testid='movie' className="cl-movie">
             <div className="cl-movie__info">
-                <img className="cl-movie__image" src={`https://www.themoviedb.org/t/p/w185/${movie.poster_path}`} alt='movie' />
+                <img className="cl-movie__image" src={`https://www.themoviedb.org/t/p/w342/${movie.poster_path}`} alt='movie' />
                 <img className="cl-movie__image-mobile" src={`https://www.themoviedb.org/t/p/original/${movie.backdrop_path}`} alt='movie' />
                 <div>
                     <div className="cl-movie__header">

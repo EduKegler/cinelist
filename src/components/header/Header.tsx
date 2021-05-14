@@ -9,7 +9,7 @@ import logoWhite from './../../assets/images/logo_white.png';
 
 export const Header = React.memo(() => {
 
-    const { setSearch, search, setPage } = useSearchMovie();
+    const { setSearch, search, setPage, handleForceSearch } = useSearchMovie();
 
     const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(event.target.value)
@@ -36,7 +36,7 @@ export const Header = React.memo(() => {
                         placeholder="I'm looking for..."
                         onChange={handleChangeSearch}
                     />
-                    <FontAwesomeIcon icon={faSearch} />
+                    <FontAwesomeIcon onClick={handleForceSearch} icon={faSearch} />
                 </div>
             </div>
             <div className="cl-header__mobile">

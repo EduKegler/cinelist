@@ -59,7 +59,8 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
     }
 
     return (
-        <div data-testid='movie-card' className={`cl-movieCard${isVisible ? ' cl-movieCard--open' : ' cl-movieCard--close'}`}>
+
+        <div data-testid='movie-card' className={`cl-movieCard ${isVisible ? ' cl-movieCard--open' : ' cl-movieCard--close'}`}>
             <div className="cl-movieCard__header">
                 <div data-testid='movie-card-title' className='cl-movieCard__title'>
                     {movie.title}
@@ -82,9 +83,9 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
                 </span>
 
                 <span onClick={toggleWatchLaterListItem}>
-                    <FontAwesomeIcon 
-                        color='#eb7000' 
-                        icon={isInWatchLaterList ? faClockSolid : faClockRegular} 
+                    <FontAwesomeIcon
+                        color='#eb7000'
+                        icon={isInWatchLaterList ? faClockSolid : faClockRegular}
                         data-testid='movie-card-watch-later'
                     />
                     <span>Watch Later</span>
@@ -104,5 +105,6 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
                     More Details
                 </div>
             </div>
-        </div>)
+        </div>
+    )
 });

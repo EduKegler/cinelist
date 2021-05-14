@@ -116,11 +116,13 @@ export const MoviePage = React.memo(() => {
         <div data-testid='movie' className="cl-movie">
             <div className="cl-movie__info">
                 <img
+                    loading="lazy"
                     className="cl-movie__image"
                     src={movie.poster_path ? `https://www.themoviedb.org/t/p/w342/${movie.poster_path}` : notFoundPoster}
                     alt='movie'
                 />
                 <img
+                    loading="lazy"
                     className="cl-movie__image-mobile"
                     src={movie.backdrop_path ? `https://www.themoviedb.org/t/p/original/${movie.backdrop_path}` : notFoundBackdrop}
                     alt='movie'

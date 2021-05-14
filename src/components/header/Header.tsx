@@ -32,7 +32,7 @@ export const Header = React.memo(() => {
                 <Logo />
                 <div className="cl-header__search">
                     <input
-                        value={search}
+                        value={search || ''}
                         placeholder="I'm looking for..."
                         onChange={handleChangeSearch}
                     />
@@ -47,7 +47,7 @@ export const Header = React.memo(() => {
 
                 <div className="cl-header__search">
                     <input
-                        value={search}
+                        value={search || ''}
                         placeholder="I'm looking for..."
                         onChange={handleChangeSearch}
                     />

@@ -19,6 +19,7 @@ export const MovieThumb = React.memo((props: MovieThumbProps) => {
                 onClick={() => visible.onChange(true)}
             >
                 <img
+                    loading="lazy"
                     src={movie.poster_path ? `https://www.themoviedb.org/t/p/w185/${movie.poster_path}` : 
                         notFoundPoster
                     }   

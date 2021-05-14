@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Content } from '../content/Content';
 import { ConfigContextProvider } from '../contexts/ConfigContextProvider';
 import { MyListMovieProvider } from '../contexts/MyMoviesContextProvider';
@@ -9,9 +9,10 @@ import { Sider } from '../sider/Sider';
 import './app.scss';
 
 export const App = React.memo(() => {
+    console.log(process.env.PUBLIC_URL)
     return (
         <div className="cl-app">
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <HashRouter>
                 <MyListMovieProvider>
                     <SearchMovieContextProvider>
                         <ConfigContextProvider>
@@ -23,7 +24,7 @@ export const App = React.memo(() => {
                         </ConfigContextProvider>
                     </SearchMovieContextProvider>
                 </MyListMovieProvider>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     )
 });

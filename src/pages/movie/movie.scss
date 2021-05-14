@@ -34,6 +34,10 @@
 
     .cl-movie__cast p {
         margin-bottom: 1rem;
+        font-weight: 300;
+        span { 
+            font-weight: bold;
+        }
     }
 
     .cl-movie__actions { 

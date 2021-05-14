@@ -2,9 +2,9 @@ import React from 'react';
 import { Route } from 'react-router';
 import './content.scss';
 import { CSSTransition } from 'react-transition-group'
-import { Movies } from '../../api/pages/movies/Movies';
-import { MoviePage } from '../../api/pages/movie/Movie';
-import { MyMovies } from '../../api/pages/myMovies/MyMovies';
+import { Movies } from '../../pages/movies/Movies';
+import { MoviePage } from '../../pages/movie/Movie';
+import { MyMovies } from '../../pages/myMovies/MyMovies';
 
 export const Content = React.memo(() => {
 

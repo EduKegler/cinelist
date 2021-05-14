@@ -1,6 +1,6 @@
 import React from "react";
-import { useSearchMovie } from "../../../components/contexts/SearchContextProvider";
-import { MovieThumb } from "../../../components/movieThumb/MovieThumb";
+import { useSearchMovie } from "../../components/contexts/SearchContextProvider";
+import { MovieThumb } from "../../components/movieThumb/MovieThumb";
 
 export const Movies = React.memo(() => {
 

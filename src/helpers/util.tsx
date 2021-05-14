@@ -39,3 +39,5 @@ export const usePrevious = <T extends {}>(value?: T) => {
   });
   return ref.current;
 };
+
+export const multiplyTest = (val1: number, val2: number) => val1 * val2;

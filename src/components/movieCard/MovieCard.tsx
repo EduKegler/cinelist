@@ -15,7 +15,6 @@ export type Movie = {
     overview: string;
     poster_path: string;
     title: string;
-    vote_count: number;
     vote_average: number;
 }
 
@@ -60,19 +59,21 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
     }
 
     return (
-        <div className={`cl-movieCard${isVisible ? ' cl-movieCard--open' : ' cl-movieCard--close'}`}>
+        <div data-testid='movie-card' className={`cl-movieCard${isVisible ? ' cl-movieCard--open' : ' cl-movieCard--close'}`}>
             <div className="cl-movieCard__header">
-                <div className='cl-movieCard__title'>
+                <div data-testid='movie-card-title' className='cl-movieCard__title'>
                     {movie.title}
                 </div>
                 <div className='cl-movieCard__categories'>
-                    {movie.genre_ids.map(genreId => getGenreById(genreId)).join(' - ')}
+                    {movie.genre_ids.map(genreId => getGenreById && getGenreById(genreId)).join(' - ')}
                 </div>
             </div>
             <div className='cl-movieCard__verticalHorizontal' />
             <div className="cl-movieCard__overview">
                 <b>Overview:</b>
-                <p>{movie.overview || 'There\'s nothing here, yet.'}</p>
+                <p data-testid='movie-card-overview'>
+                    {movie.overview || 'There\'s nothing here, yet.'}
+                </p>
             </div>
             <div className="cl-movieCard__actions">
                 <span>
@@ -81,8 +82,10 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
                 </span>
 
                 <span onClick={toggleWatchLaterListItem}>
-                    <FontAwesomeIcon
-                        color='#eb7000' icon={isInWatchLaterList ? faClockSolid : faClockRegular}
+                    <FontAwesomeIcon 
+                        color='#eb7000' 
+                        icon={isInWatchLaterList ? faClockSolid : faClockRegular} 
+                        data-testid='movie-card-watch-later'
                     />
                     <span>Watch Later</span>
                 </span>
@@ -91,6 +94,7 @@ export const MovieCard = React.memo((props: MovieCardProps) => {
                     <FontAwesomeIcon
                         color='#eb7000'
                         icon={isBookmarked ? faBookmarkSolid : faBookmarkRegular}
+                        data-testid='movie-card-bookmark'
                     />
                     <span>Booksmark</span>
                 </span>

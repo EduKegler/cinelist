@@ -14,7 +14,7 @@ so that each user can have their own list without the need to create a new token
 # How to run?
 
 Just follow the steps:
-Clone this project and run `npm run install`.
+Clone this project and run `npm install`.
 
 You will need a token to consume the API, you can get it here https://www.themoviedb.org/settings/api. 
 Then create an .env file at the root with the TOKEN and the API URL. e.g.

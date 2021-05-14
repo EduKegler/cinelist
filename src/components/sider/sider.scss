@@ -11,7 +11,7 @@
 
         position: fixed;
         z-index: 1;
-        top: 17%;
+        top: 10.5rem;
 
         a {
             text-decoration: none;
@@ -20,7 +20,7 @@
         }
 
         a:hover,
-        .active {
+        .cl-sider__item-active {
             border-left: 2px solid var(--primary);
             background: linear-gradient(90deg, var(--gray-200) 10%, var(--primary-dark) 100%);
         }

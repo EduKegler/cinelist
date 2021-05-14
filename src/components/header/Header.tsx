@@ -4,7 +4,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import './header.scss';
 import { useSearchMovie } from '../contexts/SearchContextProvider';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logoWhite from './../../assets/images/logo_white.png';
 
 export const Header = React.memo(() => {
@@ -16,13 +16,15 @@ export const Header = React.memo(() => {
         setPage(1)
     };
 
+    const location = useLocation();
+    const isActive = (key: string) => location.pathname === key ? 'cl-sider__item-active' : '';
+
     const Menu = () => <div className='cl-header__menu'>
-        <Link to='/'>Search</Link>
-        <Link to='/my-list'>My List</Link>
-        <Link to='/categories'>Categories</Link>
+        <Link className={isActive('/')} to='/'>Search</Link>
+        <Link className={isActive('/my-list')} to='/my-list'>My List</Link>
     </div>;
 
-    const Logo = () => <img src={logoWhite} alt='logo' />
+    const Logo = () => <Link to='/'><img src={logoWhite} alt='logo' /></Link>
 
     return (
         <header className="cl-header">

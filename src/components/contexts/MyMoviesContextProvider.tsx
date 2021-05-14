@@ -6,7 +6,7 @@ import { Movie } from "../movieCard/MovieCard";
 type MyListMovieData = {
     insertMovie: (movie: Movie) => void;
     removeMovie: (movie: Movie) => void;
-    isMovieAlreadySave: (movie: Movie) => boolean;
+    isMovieAlreadySave: (id: number) => boolean;
     myMovies: Movie[];
 }
 
@@ -30,8 +30,8 @@ export const MyListMovieProvider = React.memo((props: MyListMovieProps) => {
         deleteWatchListItem(movie);
     }
 
-    const isMovieAlreadySave = (movie: Movie) => 
-        myMovies.find(mov => mov.id === movie.id) ? true : false;
+    const isMovieAlreadySave = (id: Number) => 
+        myMovies.find(mov => mov.id === id) ? true : false;
     
 
     return (

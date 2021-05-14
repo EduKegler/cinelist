@@ -7,6 +7,7 @@ import { Movie } from "../movieCard/MovieCard";
 
 type SearchMovieContextData = {
     search: string;
+    hasError: string;
     loading: boolean;
     hasMore: boolean;
     setSearch: (search: string) => void;
@@ -28,6 +29,7 @@ export const SearchMovieContextProvider = React.memo((props: SearchMovieContextP
     const [loading, setLoading] = React.useState(false);
     const [page, setPage] = React.useState(1);
     const [hasMore, setHasMore] = React.useState(true);
+    const [hasError, setHasError] = React.useState('');
 
     const searchTerm = useDebounce(search, 1000);
     const location = useLocation();
@@ -47,7 +49,12 @@ export const SearchMovieContextProvider = React.memo((props: SearchMovieContextP
                 setHasMore(data.page !== data.total_pages);
             })
         } catch (err) {
-            console.error(err);
+            if (err.response!.status === 404) { 
+                setHasError('Please, make sure you put the REACT_APP_URL variable in the .env file');
+            }
+            if (err.response!.status === 401) { 
+                setHasError('Please, make sure you put the REACT_APP_TOKEN variable in the .env file');
+            }
         } finally {
             setLoading(false)
         }
@@ -77,7 +84,16 @@ export const SearchMovieContextProvider = React.memo((props: SearchMovieContextP
 
     return (
         <SearchMovieContext.Provider
-            value={{ search, setSearch, movies, loading, hasMore, setPage, handleForceSearch }}
+            value={{ 
+                search, 
+                setSearch, 
+                movies, 
+                loading, 
+                hasMore, 
+                setPage,
+                handleForceSearch, 
+                hasError 
+            }}
         >
             {props.children}
         </SearchMovieContext.Provider>

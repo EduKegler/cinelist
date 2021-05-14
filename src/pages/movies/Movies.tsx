@@ -4,7 +4,7 @@ import { MovieThumb } from "../../components/movieThumb/MovieThumb";
 
 export const Movies = React.memo(() => {
 
-    const { movies, hasMore, setPage, loading } = useSearchMovie();
+    const { movies, hasMore, setPage, loading, hasError } = useSearchMovie();
 
     const ref = React.useRef(null);
     const lastMovieElementRef = React.useCallback(
@@ -26,8 +26,11 @@ export const Movies = React.memo(() => {
         [loading, hasMore]
     );
 
+
+
     return (
         <div className="cl-content__movies">
+            {hasError && <span>{hasError}</span>} 
             {movies.length > 0 && movies.map((movie, index) =>
                 <div key={movie.id + '-' + index}
                     ref={movies.length === index + 1 ? lastMovieElementRef : undefined}
@@ -35,7 +38,7 @@ export const Movies = React.memo(() => {
                     <MovieThumb movie={movie} />
                 </div>)}
             {loading && 'Loading...'}
-            {(movies.length === 0 && !loading) && 'No results found.'}
+            {(movies.length === 0 && !loading && !hasError) && 'No results found.'}
         </div>
     );
 });

@@ -5,7 +5,7 @@ import { MovieThumb } from "../../../components/movieThumb/MovieThumb";
 export const MyMovies = React.memo(() => {
 
     const { myMovies } = useMyList();
-    console.log(myMovies)
+    
     return (
         <div className="cl-content__movies">
             {!myMovies.length ? 'There\'s nothing here, yet.'

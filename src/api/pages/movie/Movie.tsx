@@ -107,14 +107,12 @@ export const MoviePage = React.memo(() => {
 
     const handleReturn = () => { 
         history.back();
-        console.log(providers);
-        
     }
 
-    // const hasOnAmazon = providers.find(provider => ['Amazon Prime Video', 'Amazon Video'].includes(provider.provider_name)) ? true : false;
-    // const hasOnNetFlix = providers.find(provider => provider.provider_name === 'Netflix') ? true : false;
-    // const hasOnYoutube = providers.find(provider => provider.provider_name === 'YouTube') ? true : false;
-    // const hasOnDisney = providers.find(provider => provider.provider_name === 'Disney Plus') ? true : false;
+    const hasOnAmazon = providers.find(provider => ['Amazon Prime Video', 'Amazon Video'].includes(provider.provider_name)) ? true : false;
+    const hasOnNetFlix = providers.find(provider => provider.provider_name === 'Netflix') ? true : false;
+    const hasOnYoutube = providers.find(provider => provider.provider_name === 'YouTube') ? true : false;
+    const hasOnDisney = providers.find(provider => provider.provider_name === 'Disney Plus') ? true : false;
 
     return (
         <div className="cl-movie">
@@ -170,10 +168,10 @@ export const MoviePage = React.memo(() => {
                             <FontAwesomeIcon icon={faArrowLeft} />
                             <span>Return</span>
                         </div>
-                        {true && <img src={amazon} alt='amazon' width={100} />}
-                        {true && <img src={disney} alt='disney' width={100} />}
-                        {true && <img src={netflix} alt='netflix' width={100} />}
-                        {true && <img src={youtube} alt='youtube' width={100} />}
+                        {hasOnAmazon && <img src={amazon} alt='amazon' width={100} />}
+                        {hasOnDisney && <img src={disney} alt='disney' width={100} />}
+                        {hasOnNetFlix && <img src={netflix} alt='netflix' width={100} />}
+                        {hasOnYoutube && <img src={youtube} alt='youtube' width={100} />}
                     </div>
                 </div>
             </div>

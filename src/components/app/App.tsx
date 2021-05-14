@@ -11,7 +11,7 @@ import './app.scss';
 export const App = React.memo(() => {
     return (
         <div className="cl-app">
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <MyListMovieProvider>
                     <SearchMovieContextProvider>
                         <ConfigContextProvider>

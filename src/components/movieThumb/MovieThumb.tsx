@@ -1,7 +1,7 @@
 import React from 'react';
 import { Movie, MovieCard } from '../movieCard/MovieCard';
 import { useSwitch } from '../../helpers/util';
-
+import notFoundPoster from '../../assets/images/notFound185w.png'
 import './movieThumb.scss'
 
 export interface MovieThumbProps {
@@ -19,7 +19,9 @@ export const MovieThumb = React.memo((props: MovieThumbProps) => {
                 onClick={() => visible.onChange(true)}
             >
                 <img
-                    src={`https://www.themoviedb.org/t/p/w185/${movie.poster_path}`}
+                    src={movie.poster_path ? `https://www.themoviedb.org/t/p/w185/${movie.poster_path}` : 
+                        notFoundPoster
+                    }   
                     alt='movie'
                 />
                 <span className="cf-movieThumb__details">Details</span>

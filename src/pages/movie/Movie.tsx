@@ -11,6 +11,8 @@ import { deleteBookmarkItem, insertBookmarkItem, isBookmarkItem } from "../../ap
 import { faArrowLeft, faBookmark as faBookmarkSolid, faClock as faClockSolid, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as faBookmarkRegular, faClock as faClockRegular } from '@fortawesome/free-regular-svg-icons';
 import { fetchMovieDetails, fetchMovieProviders, fetchMovieCredits, fetchMovieVideos } from './movie.service';
+import notFoundPoster from '../../assets/images/notFound342w.png'
+import notFoundBackdrop from '../../assets/images/notFound1280w.png'
 
 export interface Movie {
     backdrop_path: string;
@@ -101,7 +103,7 @@ export const MoviePage = React.memo(() => {
         }
     }
 
-    const handleReturn = () => { 
+    const handleReturn = () => {
         history.back();
     }
 
@@ -113,8 +115,16 @@ export const MoviePage = React.memo(() => {
     return (
         <div data-testid='movie' className="cl-movie">
             <div className="cl-movie__info">
-                <img className="cl-movie__image" src={`https://www.themoviedb.org/t/p/w342/${movie.poster_path}`} alt='movie' />
-                <img className="cl-movie__image-mobile" src={`https://www.themoviedb.org/t/p/original/${movie.backdrop_path}`} alt='movie' />
+                <img
+                    className="cl-movie__image"
+                    src={movie.poster_path ? `https://www.themoviedb.org/t/p/w342/${movie.poster_path}` : notFoundPoster}
+                    alt='movie'
+                />
+                <img
+                    className="cl-movie__image-mobile"
+                    src={movie.backdrop_path ? `https://www.themoviedb.org/t/p/original/${movie.backdrop_path}` : notFoundBackdrop}
+                    alt='movie'
+                />
                 <div>
                     <div className="cl-movie__header">
                         <div data-testid='movie-title' className='cl-movie__title'>
@@ -146,7 +156,7 @@ export const MoviePage = React.memo(() => {
                         <span onClick={toggleWatchLaterListItem}>
                             <FontAwesomeIcon
                                 data-testid='movie-watch-later'
-                                color='#eb7000' 
+                                color='#eb7000'
                                 icon={isInWatchLaterList ? faClockSolid : faClockRegular}
                             />
                             <span>Watch Later</span>

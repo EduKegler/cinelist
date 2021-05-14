@@ -1,17 +1,20 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const dotEnv = require("dotenv-webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: 'production',
     entry: './src/index.tsx',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, '/dist'),
-        publicPath: '/'
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: './'
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './src/index.html' }), new dotEnv()],
+        new HtmlWebpackPlugin({ template: './index.html' }), new dotEnv(),
+        new CopyWebpackPlugin({ patterns: [{ from: 'public', to: 'public' }] })
+    ],
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
